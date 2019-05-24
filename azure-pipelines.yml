@@ -32,7 +32,7 @@ steps:
   inputs:
     azureSubscription: 'build-demo'
     scriptLocation: inlineScript
-    inlineScript: 'az ml run submit-script -c sklearn -e test -d myenv.yml train.py'
+    inlineScript: 'az ml run submit-script -c sklearn -e testen -d myenv.yml train.py'
 
 - task: AzureCLI@1
   displayName: 'Register model'
