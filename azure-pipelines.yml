@@ -9,48 +9,48 @@ steps:
 - task: AzureCLI@1
   displayName: 'Install the CLI'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az extension add -n azure-cli-ml'
 
 - task: AzureCLI@1
   displayName: 'Attach folder to workspace'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az ml folder attach -w jacmlworkspace -g ml-rg'
 
 - task: AzureCLI@1
   displayName: 'Create compute for training'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az ml computetarget create jaccomputers -n cpu --vm-size STANDARD_D2_V2 --max-nodes 4'
   
 - task: AzureCLI@1
   displayName: 'Submit script run'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az ml run submit-script -c sklearn -e testen -d myenv.yml train.py'
 
 - task: AzureCLI@1
   displayName: 'Register model'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az ml model register -n mymodel222 -p sklearn_regression_model.pkl -t model.json'
 
 - task: AzureCLI@1
   displayName: 'Deploy model'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az ml model deploy -n aci222cicd -f model.json --ic inferenceConfig.yml --dc deploymentConfig.yml --overwrite'
 
 - task: AzureCLI@1
   displayName: 'Delete deployed service'
   inputs:
-    azureSubscription: 'build-demo'
+    azureSubscription: 'efc6ce53-8c81-4705-8b46-88b98828398f'
     scriptLocation: inlineScript
     inlineScript: 'az ml service delete -n aci222cicd'
